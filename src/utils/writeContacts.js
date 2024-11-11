@@ -5,14 +5,16 @@ import { readContacts } from './readContacts.js';
 export const writeContacts = async (updatedContacts) => {
   try {
     const data = await readContacts();
-    const userData = Array.isArray(data) ? data : JSON.parse(data) || [];
-    
-    const contactsToAdd = Array.isArray(updatedContacts) ? updatedContacts : [updatedContacts];
-    userData.push(...contactsToAdd);
+    const userData = data ? JSON.parse(data) : [];
+
+    if (updatedContacts.length) {
+      userData.push(...updatedContacts);
+    } else {
+      userData.push(updatedContacts);
+    }
 
     await fs.writeFile(PATH_DB, JSON.stringify(userData, null, 2));
   } catch (error) {
-    console.error(`error to edit: ${error.message}`);
     throw new Error(error.message);
   }
 };

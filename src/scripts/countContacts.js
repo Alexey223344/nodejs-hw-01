@@ -3,10 +3,10 @@ import { getAllContacts } from './getAllContacts.js';
 export const countContacts = async () => {
   try {
     const users = await getAllContacts();
-    return users.length;
+    const newUser = users.length;
+    return newUser;
   } catch (error) {
-    console.error(`Error counting contacts: ${error.message}`);
-    throw error;
+    throw new Error(error.message);
   }
 };
 

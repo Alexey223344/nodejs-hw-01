@@ -3,11 +3,10 @@ import { writeContacts } from '../utils/writeContacts.js';
 
 const generateContacts = async (number) => {
   try {
-    const contacts = Array.from({ length: number }, createFakeContact);
-    await writeContacts(contacts);
+    const generateUsers = Array.from({ length: number + 1 }, () => createFakeContact());
+    await writeContacts(generateUsers);
   } catch (error) {
-    console.error(`Error generating contacts: ${error.message}`);
-    throw error;
+    throw new Error(error.message);
   }
 };
 

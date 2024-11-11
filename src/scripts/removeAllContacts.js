@@ -6,10 +6,8 @@ export const removeAllContacts = async () => {
     const emptyArray = [];
     await fs.writeFile(PATH_DB, JSON.stringify(emptyArray));
   } catch (error) {
-    console.error(`Failed to clear contacts: ${error.message}`);
-    throw error;
+    throw new Error(error.message);
   }
 };
-
 
 removeAllContacts();

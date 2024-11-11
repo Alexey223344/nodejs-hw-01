@@ -2,16 +2,11 @@ import { readContacts } from '../utils/readContacts.js';
 
 export const getAllContacts = async () => {
   try {
-    const data = await readContacts();
-    const contacts = JSON.parse(data);
-    return contacts;
+    const contacts = await readContacts();
+ return JSON.parse(contacts);
   } catch (error) {
-    console.error(`error to take contacts: ${error.message}`);
-    throw error;
+   throw new Error(error.message);
   }
 };
 
-
-getAllContacts()
-  .then((contacts) => console.log(contacts))
-  .catch((error) => console.error(`error: ${error.message}`));
+console.log(await getAllContacts());
